@@ -11,5 +11,6 @@ namespace IMS.Web.Business.Interfaces
     {
         bool IsValidUser(string userName, string password);
         User GetUser(string userName, string password);
+        bool AddUser(User user);
     }
 }

@@ -29,5 +29,24 @@ namespace IMS.Web.Business.Implementation
         {
             return _applicationDbContext.Users.FirstOrDefault(x => x.UserName == userName && x.Password == password);
         }
+
+        public bool AddUser(User user)
+        {
+            var role = _applicationDbContext.Roles.FirstOrDefault(x => x.Id == user.RoleId);
+            if(role != null)
+            {
+                var registerUser = new User()
+                {
+                    Id = 0,
+                    RoleId = user.RoleId,
+                    UserName = user.UserName,
+                    Password = user.Password
+                };
+                _applicationDbContext.Users.Add(registerUser);
+                _applicationDbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }
